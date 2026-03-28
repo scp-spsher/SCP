@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link href="style.css" rel="stylesheet">
+    <link href="icon.png" rel="icon">
+    <title>SCP-003-SP-J - Тринотовидный Крот</title>
+<style>
+    .footer-bar {
+      background-color: black;
+      color: white;
+      display: flex;          /*  Делаем контейнер flexbox */
+      justify-content: flex-end; /*  Выравниваем элементы по правому краю */
+      align-items: center;    /*  Выравниваем элементы по вертикали по центру */
+      padding: 10px;
+      border-radius: 10px 10px 0 0;
+    }
+    /*  Стили для вкладок (Правила сайта и Автору) */
+    .footer-tab {
+      margin-left: 20px;       /*  Отступ между вкладками */
+      cursor: pointer;
+      position: relative;     /*  Для позиционирования выпадающего списка */
+    }
+
+    .footer-tab a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Стили для выпадающих списков (общие) */
+    .dropdown-content {
+      display: none;          /*  Скрываем по умолчанию */
+      position: absolute;      /*  Абсолютное позиционирование относительно .footer-tab */
+      background-color: black;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;             /*  Обеспечиваем отображение поверх других элементов */
+      right: 0;               /*  Выравниваем по правому краю вкладки */
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;         /*  Занимают всю ширину выпадающего списка */
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    /*  Показываем выпадающий список при наведении */
+    .footer-tab:hover .dropdown-content {
+      display: block;        /*  Делаем видимым */
+      animation: slideIn 0.3s ease-in-out; /*  Анимация плавного появления */
+    }
+
+    /* Анимация появления */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+</style>
+</head>
+<body>
+    <header>
+        <a href="http://scp-sp.ru">
+            <img src="shapka.png" id="banner">
+        </a>
+    </header>
+    <div class="footer-bar">
+        <div class="footer-tab">
+            <a href="#">Правила сайта</a>
+            <div class="dropdown-content">
+                <a href="publication-rules">Правила публикации</a>
+                <a href="#">Контакты администрации</a>
+                <a href="#">Часто задаваемые вопросы</a>
+            </div>
+        </div>
+        <div class="footer-tab">
+            <a href="#">Автору</a>
+            <div class="dropdown-content">
+                <a href="how-to-write">Как написать объект</a>
+                <a href="#">Оформление</a>
+            </div>
+        </div>
+    </div>
+    <main id="main">
+        <nav>
+            <div class="addendum">
+                <h2>Содержание</h2>
+                <ul>
+                    <li><a href="#main">Начало</a></li>
+                    <li><a href="#scp">Особые условия содержания</a></li>
+                    <li><a href="#description">Описание</a></li>
+                    <li><a href="#note">Примечание</a></li>
+                </ul>
+            </div>
+        </nav>
+        <article>
+            <img src="scp-003-sp-j.png" class="image">
+            <h2>Объект</h2>
+            <p>SCP-003-SP-J</p>
+            <h2>Класс объекта</h2>
+            <p><a href="keter">Кетер</a></p>
+            <h2 id="scp">Особые условия содержания</h2>
+            <p>Объект следуют держать в должности Министра Культуры СП, до окончания срока, с возможностью переизбираться. Ограничивать передвижение объекта, в данный момент, возможности не представляется. SCP-003 запрещено без разрешения Совета О5 подпускать к Зоне №6 и зданию МЗСП на Спавне. Так же при присутствии объекта запрещено упоминать камни в почках. При возможности содержать в камере из бедрока - перевести в соответствующую.</p>
+            <h2 id="description">Описание</h2>
+            <p>Объект представляет собой гуманоида, человекоподобного вида, женского пола, с зелеными волосами и серыми глазами, однако цвет Глаз может меняться. В общей базе данных, объект зарегистрирован под кодом "3not_". Многие люди, знакомые с ней, зовут её "Енота" или "Тринота". В данный момент, она является министром Культуры СП.</p>
+            <p>SCP-003 может вести себя крайне агрессивно, избивать и отбирать вещи у своих жертв. При попытке запереть объект где либо, он вгрызается в любые поверхности, и пробуривает себе проход, неважно насколько поверхность тверда.</p>
+            <h2 id="note">Описание</h2>
+            <p>С ОБЪЕКТОМ ЗАПРЕЩЕНО РПШИТЬ, А ТО СМЕРТЬ - Д-р Плейсид</p>
+        </article>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

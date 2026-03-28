@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link href="style.css" rel="stylesheet">
+    <link href="icon.png" rel="icon">
+    <title>SCP-218-SP - Наблюдатель</title>
+<style>
+    .footer-bar {
+      background-color: black;
+      color: white;
+      display: flex;          /*  Делаем контейнер flexbox */
+      justify-content: flex-end; /*  Выравниваем элементы по правому краю */
+      align-items: center;    /*  Выравниваем элементы по вертикали по центру */
+      padding: 10px;
+      border-radius: 10px 10px 0 0;
+    }
+    /*  Стили для вкладок (Правила сайта и Автору) */
+    .footer-tab {
+      margin-left: 20px;       /*  Отступ между вкладками */
+      cursor: pointer;
+      position: relative;     /*  Для позиционирования выпадающего списка */
+    }
+
+    .footer-tab a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Стили для выпадающих списков (общие) */
+    .dropdown-content {
+      display: none;          /*  Скрываем по умолчанию */
+      position: absolute;      /*  Абсолютное позиционирование относительно .footer-tab */
+      background-color: black;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;             /*  Обеспечиваем отображение поверх других элементов */
+      right: 0;               /*  Выравниваем по правому краю вкладки */
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;         /*  Занимают всю ширину выпадающего списка */
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    /*  Показываем выпадающий список при наведении */
+    .footer-tab:hover .dropdown-content {
+      display: block;        /*  Делаем видимым */
+      animation: slideIn 0.3s ease-in-out; /*  Анимация плавного появления */
+    }
+
+    /* Анимация появления */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+</style>
+</head>
+<body>
+    <header>
+        <a href="http://scp-sp.ru">
+            <img src="shapka.png" id="banner">
+        </a>
+    </header>
+    <div class="footer-bar">
+        <div class="footer-tab">
+            <a href="#">Правила сайта</a>
+            <div class="dropdown-content">
+                <a href="publication-rules">Правила публикации</a>
+                <a href="#">Контакты администрации</a>
+                <a href="#">Часто задаваемые вопросы</a>
+            </div>
+        </div>
+        <div class="footer-tab">
+            <a href="#">Автору</a>
+            <div class="dropdown-content">
+                <a href="how-to-write">Как написать объект</a>
+                <a href="#">Оформление</a>
+            </div>
+        </div>
+    </div>
+    <main id="main">
+        <nav>
+            <div class="addendum">
+                <h2>Содержание</h2>
+                <ul>
+                    <li><a href="#main">Начало</a></li>
+                    <li><a href="#scp">Особые условия содержания</a></li>
+                    <li><a href="#description">Описание</a></li>
+                    <li><a href="#discovery">Обнаружение</a></li>
+                </ul>
+            </div>
+        </nav>
+        <article>
+            <img src="scp-218-sp-1.png" class="image">
+            <img src="scp-218-sp-2.png" class="image">
+            <h2>Объект</h2>
+            <p>SCP-218-SP</p>
+            <h2>Класс объекта</h2>
+            <p><a href="euclid">Евклид</a></p>
+            <h2 id="scp">Особые условия содержания</h2>
+            <p>SCP-218 должен находится в непрозрачном закрытом пространстве, которое исключает прямой визуальный контакт. Сотрудникам, находящимся вблизи объекта, необходимо использовать тонированные очки. Для наблюдения за объектом с безопасного расстояния используются система зеркал или цифровые камеры.</p>
+            <h2 id="description">Описание</h2>
+            <p>SCP-218 - это гуманоидное существо полностью покрытой черной, не отражающей свет кожей и ростом около 2 метров. Человек, подвергнувшийся прямому зрительному контакту с объектом, постепенно и быстро впадает в безумие в течение от 10 до 40 минут. Кроме того, прямой физический контакт с объектом провоцирует развитие эпилепсии у здоровых людей и значительно повышает риск возникновения эпилептических припадков у больных эпилепсией.</p>
+            <h2 id="discovery">Обнаружение</h2>
+            <p>SCP-218 был обнаружен Мобильной оперативной группой в заснеженной местности в горах <code>[УДАЛЕНО]</code>. Один из рядовых подвергся воздействию аномалии и начал быстро терять рассудок. В первые 3 минуты он пожаловался на головокружение, жар и звон в ушах. Спустя 8 минут рядовой начал слышать голоса, которые громко шептали что-то на незнакомом ему языке. Через 12 минут он перестал реагировать на внешние раздражители и через 48 секунд после этого потерял сознание на 10 часов. Рядовой был передан Медицинской службе и прошел курс психической реабилитации.</p>
+        </article>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
