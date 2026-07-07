@@ -158,75 +158,103 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </article>
     </main>
     <script>
-      function generateDailySCP() {
-        const baseUrl = "/SCP/scp-";
+      <script>
+function generateDailySCP() {
+    const baseUrl = "/SCP/scp-";
 
-        const availableArticles = [
-        "003", "004", "016", "101", "124", "106",
-        "218", "228", "295", "318", "410", "476", "718"
+    const availableArticles = [
+        "003",
+        "004",
+        "005",
+        "016",
+        "101",
+        "124",
+        "106",
+        "218",
+        "228",
+        "295",
+        "318",
+        "410",
+        "476",
+        "718"
     ];
 
-    // Количество дней с 01.01.1970
-        const dayNumber = Math.floor(Date.now() / 86400000);
+    // Номер дня с 1 января 1970
+    const daySeed = Math.floor(Date.now() / 86400000);
 
-    // Псевдослучайное число, зависящее только от дня
-        const randomIndex =
-            Math.abs(Math.sin(dayNumber) * 10000) %
-            availableArticles.length;
-
-        const scpNumber =
-            availableArticles[Math.floor(randomIndex)];
-
-        return {
-            url: `${baseUrl}${scpNumber}-sp`,
-            number: scpNumber
-        };
+    // Детерминированный генератор
+    function seededRandom(seed) {
+        const x = Math.sin(seed) * 10000;
+        return x - Math.floor(x);
     }
 
-      async function getObjectName(scpNumber) {
-        try {
-          const response = await fetch('objects.json');
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const data = await response.json();
-          
-          const object = data.find(obj => obj.number === scpNumber);
+    const randomIndex = Math.floor(
+        seededRandom(daySeed) * availableArticles.length
+    );
 
-          if (object) {
-            return object.name;
-          } else {
-            return "Объект не найден";
-          }
-        } catch (error) {
-          console.error("Ошибка при получении названия объекта:", error);
-          return "Ошибка получения названия";
+    const scpNumber = availableArticles[randomIndex];
+
+    return {
+        number: scpNumber,
+        url: `${baseUrl}${scpNumber}-sp`
+    };
+}
+
+async function getObjectName(scpNumber) {
+    try {
+        const response = await fetch("./objects.json");
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
         }
-      }
-      
-      document.addEventListener('DOMContentLoaded', async function() {
-        const dailySCPElement = document.getElementById('daily-scp');
-        try {
-          const dailySCP = generateDailySCP();
-          const dailySCPUrl = dailySCP.url;
-          const scpNumber = dailySCP.number;
 
-          if (!dailySCPUrl || !scpNumber) {
-            console.error("Ошибка: Не удалось сгенерировать URL или номер SCP");
-            dailySCPElement.textContent = "Ошибка: Не удалось загрузить статью дня.";
-            return;
-          }
-        
-          const objectName = await getObjectName(scpNumber);
+        const data = await response.json();
 
-          const linkText = `SCP-${scpNumber}-SP - ${objectName}`;
+        const object = data.find(
+            item => item.number === scpNumber
+        );
 
-        dailySCPElement.innerHTML = `Статья дня: <a href="${dailySCPUrl}">${linkText}</a>`;
-      } catch (error) {
-        console.error("Произошла ошибка:", error);
-        dailySCPElement.textContent = "Ошибка загрузки статьи дня.";
-      }
-    });
+        return object
+            ? object.name
+            : "Неизвестный объект";
+
+    } catch (error) {
+        console.error(error);
+        return "Ошибка получения названия";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const dailySCPElement =
+        document.getElementById("daily-scp");
+
+    if (!dailySCPElement) {
+        console.error(
+            "Элемент #daily-scp не найден"
+        );
+        return;
+    }
+
+    try {
+        const dailySCP = generateDailySCP();
+
+        const objectName =
+            await getObjectName(dailySCP.number);
+
+        dailySCPElement.innerHTML = `
+            Статья дня:
+            <a href="${dailySCP.url}">
+                SCP-${dailySCP.number}-SP — ${objectName}
+            </a>
+        `;
+    } catch (error) {
+        console.error(error);
+
+        dailySCPElement.textContent =
+            "Ошибка загрузки статьи дня.";
+    }
+});
+</script>
   </script>
   <script src="script.js"></script>
 </body>
