@@ -160,26 +160,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
       function generateDailySCP() {
         const baseUrl = "/SCP/scp-";
+
         const availableArticles = [
-          "003", "004", "005", "016", "101", "106, "124", "106", "218", "228", "295", "410", "476", 
-          "718"
-        ];
-        const today = new Date();
-        const seed = today.getFullYear() * 365 + today.getDate();
-        function xorshift(seed) {
-          let x = seed;
-          x ^= x << 13;
-          x ^= x >> 17;
-          x ^= x << 5;
-          return x;
-        }
+        "003", "004", "016", "101", "124", "106",
+        "218", "228", "295", "318", "410", "476", "718"
+    ];
 
-        const randomIndex = Math.abs(xorshift(seed)) % availableArticles.length;
-        const scpNumber = availableArticles[randomIndex];
-        const dailySCPUrl = baseUrl + scpNumber + "-sp";
+    // Количество дней с 01.01.1970
+        const dayNumber = Math.floor(Date.now() / 86400000);
 
-        return { url: dailySCPUrl, number: scpNumber };
-      }
+    // Псевдослучайное число, зависящее только от дня
+        const randomIndex =
+            Math.abs(Math.sin(dayNumber) * 10000) %
+            availableArticles.length;
+
+        const scpNumber =
+            availableArticles[Math.floor(randomIndex)];
+
+        return {
+            url: `${baseUrl}${scpNumber}-sp`,
+            number: scpNumber
+        };
+    }
 
       async function getObjectName(scpNumber) {
         try {
