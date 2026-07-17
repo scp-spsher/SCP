@@ -47,7 +47,7 @@ header {
 main {
   display: grid;
   gap: 40px;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 300px minmax(0, 1fr);
   padding: 40px;
   background-color: var(--secondary-color);
   border-radius: 10px;
