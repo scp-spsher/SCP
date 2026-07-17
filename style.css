@@ -311,8 +311,5 @@ th {
     border: 2px solid var(--input-border);
     border-radius: 4px;
 }
-article {
-  padding-left: 40px;
-}
 
 }
