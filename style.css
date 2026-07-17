@@ -301,7 +301,7 @@ th {
   .image {
     width: 100%;
     float: none;
-
+  }
   .input {
     font-size: 32px;
     font-size: max(16px, 1em);
